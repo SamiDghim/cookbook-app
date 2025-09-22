@@ -1,0 +1,32 @@
+# Node
+node_modules/
+npm-debug.log*
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Vite
+dist/
+.env
+.vite
+
+# Editor
+.vscode/
+.idea/
+.DS_Store
+
+# OS
+Thumbs.db
+
+# Local data
+/data/
+data/
+*.db
+
+# Logs
+logs/
+*.log
+
+# Optional
+coverage/
+*.local

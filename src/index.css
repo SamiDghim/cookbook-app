@@ -1,0 +1,101 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Force the app to use the light color scheme so the main background remains white */
+  color-scheme: light;
+}
+
+body {
+  background-color: #ffffff;
+  color: #1a202c;
+}
+
+.container {
+  max-width: 48rem; /* max-w-3xl */
+  margin-left: auto; /* mx-auto */
+  margin-right: auto; /* mx-auto */
+  padding: 1rem; /* p-4 */
+}
+
+.card {
+  border-radius: 1rem; /* rounded-2xl */
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px 0 rgb(0 0 0 / 0.06); /* shadow */
+  padding: 1rem; /* p-4 */
+  background-color: #ffffff; /* bg-white */
+  border: 1px solid #e5e7eb; /* border border-gray-200 */
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem; /* rounded-xl */
+  padding-left: 1rem; /* px-4 */
+  padding-right: 1rem; /* px-4 */
+  padding-top: 0.5rem; /* py-2 */
+  padding-bottom: 0.5rem; /* py-2 */
+  border: 1px solid #d1d5db; /* border */
+  font-size: 0.875rem; /* text-sm */
+  font-weight: 500; /* font-medium */
+  transition: opacity 0.2s;
+}
+.btn:hover {
+  opacity: 0.9;
+}
+
+.btn-primary {
+  @apply bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900;
+}
+
+.input {
+  /* Keep layout utilities from Tailwind but force a white background and dark text */
+  @apply w-full rounded-xl border px-3 py-2;
+  background-color: #ffffff;
+  color: #1a202c;
+  border: 1px solid #d1d5db;
+}
+
+/* Also ensure native form elements are white regardless of any dark-mode utilities */
+input,
+textarea,
+select {
+  background-color: #ffffff;
+  color: #1a202c;
+  border: 1px solid #d1d5db;
+}
+
+.label {
+  @apply text-sm text-gray-600 dark:text-gray-400;
+}
+
+/* Modal/backdrop animation */
+.modal-backdrop {
+  animation: fadeIn 160ms ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Toast animation */
+.animate-toast-in {
+  animation: toastIn 220ms cubic-bezier(.2,.8,.2,1);
+}
+
+@keyframes toastIn {
+  from { transform: translateY(8px) scale(.98); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+/* Toast progress bar */
+.animate-toast-progress {
+  animation: toastProgress 4s linear forwards;
+}
+
+@keyframes toastProgress {
+  from { transform: scaleX(1); transform-origin: left; }
+  to { transform: scaleX(0); transform-origin: left; }
+}
