@@ -7,7 +7,10 @@ export default function Profile() {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    if (!token) return setError('Not logged in');
+    if (!token) {
+      setError('Not logged in');
+      return;
+    }
     fetchProfile(token).then(setProfile).catch((e) => setError(e?.response?.data?.message || 'Failed to load'));
   }, []);
 
@@ -21,7 +24,7 @@ export default function Profile() {
         <p><strong>Username:</strong> {profile.username}</p>
         <p className="text-sm text-gray-600">Member since: {new Date(profile.createdAt).toLocaleDateString()}</p>
         <div className="mt-4">
-          <button className="btn" onClick={() => { localStorage.removeItem('token'); window.location.href = '/'; }}>Logout</button>
+          <button type="button" className="btn" onClick={() => { localStorage.removeItem('token'); window.location.href = '/'; }}>Logout</button>
         </div>
       </div>
     </div>

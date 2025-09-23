@@ -77,6 +77,7 @@ export default function Recipes() {
       {!showForm && (
         <div className="text-center">
           <button
+            type="button"
             onClick={handleAddNew}
             className="btn btn-primary flex items-center gap-2 mx-auto px-6 py-3"
           >

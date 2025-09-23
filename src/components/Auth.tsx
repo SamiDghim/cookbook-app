@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState, useMemo } from 'react';
 import { api } from '../api/client';
 
 type User = { id: string; username: string } | null;
@@ -31,8 +31,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setToken(null);
   }
 
+  const value = useMemo(() => ({ user, token, setToken, logout }), [user, token]);
+
   return (
-    <AuthContext.Provider value={{ user, token, setToken, logout }}>
+    <AuthContext.Provider value={value}>
       {children}
     </AuthContext.Provider>
   );

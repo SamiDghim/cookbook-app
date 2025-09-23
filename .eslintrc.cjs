@@ -36,5 +36,11 @@ module.exports = {
     'react/jsx-filename-extension': [1, { extensions: ['.tsx', '.jsx'] }],
     'react/react-in-jsx-scope': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
+  // TS handles prop types; avoid requiring defaultProps on optional props
+  'react/require-default-props': 'off',
+  // allow prop spreading (used with react-hook-form register)
+  'react/jsx-props-no-spreading': 'off',
+  // relax label-associated-control (many labels are group-level and use ids)
+  'jsx-a11y/label-has-associated-control': 'off',
   },
 };

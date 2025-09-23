@@ -12,6 +12,5 @@ export const RecipeSchema = z.object({
 
 export type Recipe = z.infer<typeof RecipeSchema>;
 
-// For API operations
 export type CreateRecipeInput = Omit<Recipe, 'id' | 'createdAt' | 'updatedAt'>;
 export type UpdateRecipeInput = Partial<CreateRecipeInput>;

@@ -58,6 +58,8 @@
   }
   ,
   "vitest": {
-    "setupFiles": ["src/setupTests.ts"]
+    "setupFiles": ["src/setupTests.ts"],
+    "environment": "jsdom",
+    "exclude": ["e2e/**"]
   }
 }

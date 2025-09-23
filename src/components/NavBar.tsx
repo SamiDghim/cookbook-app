@@ -31,6 +31,7 @@ export default function NavBar() {
 
           <div className="relative">
             <button
+              type="button"
               onClick={() => setOpen((v) => !v)}
               aria-expanded={open}
               className="text-sm text-gray-600 px-3 py-1 border rounded"
@@ -43,7 +44,7 @@ export default function NavBar() {
                 {token ? (
                   <div className="flex flex-col">
                         <Link to="/profile" className="px-3 py-2 text-sm text-gray-700 hover:bg-gray-50">Profile</Link>
-                        <button onClick={() => { logout(); setOpen(false); }} className="text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-50">Logout</button>
+                        <button type="button" onClick={() => { logout(); setOpen(false); }} className="text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-50">Logout</button>
                         {user && <div className="px-3 py-1 text-xs text-gray-500">{user.username}</div>}
                   </div>
                 ) : (

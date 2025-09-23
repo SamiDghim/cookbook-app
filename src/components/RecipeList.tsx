@@ -51,7 +51,7 @@ export default function RecipeList({ onSelect }: Props) {
     },
     onError: (err: any) => {
       console.error('Failed to delete recipe:', err);
-      toast.push({ type: 'error', message: error?.message || 'Failed to delete recipe' });
+      toast.push({ type: 'error', message: err?.message || 'Failed to delete recipe' });
       setToDelete(null);
     }
   });
@@ -87,8 +87,8 @@ export default function RecipeList({ onSelect }: Props) {
                 <div>
                   <h4 className="font-medium text-gray-700 mb-1">Ingredients ({recipe.ingredients.length})</h4>
                   <ul className="text-gray-600 space-y-1">
-                    {recipe.ingredients.slice(0, 3).map((ingredient, idx) => (
-                      <li key={idx} className="flex items-center">
+                    {recipe.ingredients.slice(0, 3).map((ingredient) => (
+                      <li key={ingredient} className="flex items-center">
                         <span className="w-1.5 h-1.5 bg-blue-500 rounded-full mr-2" />
                         {ingredient}
                       </li>
@@ -105,7 +105,7 @@ export default function RecipeList({ onSelect }: Props) {
                   <h4 className="font-medium text-gray-700 mb-1">Steps ({recipe.steps.length})</h4>
                   <ul className="text-gray-600 space-y-1">
                     {recipe.steps.slice(0, 2).map((step, idx) => (
-                      <li key={idx} className="flex items-start">
+                      <li key={step} className="flex items-start">
                         <span className="w-5 h-5 bg-green-100 text-green-700 rounded-full flex items-center justify-center text-xs font-bold mr-2 mt-0.5 flex-shrink-0">
                           {idx + 1}
                         </span>

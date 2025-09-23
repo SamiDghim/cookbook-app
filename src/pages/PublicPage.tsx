@@ -20,11 +20,9 @@ export default function PublicPage() {
         <h1 className="text-2xl font-bold mb-4">Public Recipes</h1>
         <p className="text-sm text-gray-600 mb-4">Browse publicly available recipes. No login required.</p>
 
-        {loading ? (
-          <div className="text-center py-8">Loading...</div>
-        ) : error ? (
-          <div className="text-red-600">{error}</div>
-        ) : (
+        {loading && <div className="text-center py-8">Loading...</div>}
+        {!loading && error && <div className="text-red-600">{error}</div>}
+        {!loading && !error && (
           <div className="space-y-4">
             {recipes.map((r) => (
               <div key={r.id} className="card">

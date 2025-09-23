@@ -28,12 +28,12 @@ export default function Signup() {
         {error && <div className="text-red-600 mb-2">{error}</div>}
         <form onSubmit={handle}>
           <div className="mb-3">
-            <label className="label">Username</label>
-            <input className="input" value={username} onChange={(e) => setUsername(e.target.value)} />
+            <label htmlFor="signup-username" className="label">Username</label>
+            <input id="signup-username" className="input" value={username} onChange={(e) => setUsername(e.target.value)} />
           </div>
           <div className="mb-3">
-            <label className="label">Password</label>
-            <input type="password" className="input" value={password} onChange={(e) => setPassword(e.target.value)} />
+            <label htmlFor="signup-password" className="label">Password</label>
+            <input id="signup-password" type="password" className="input" value={password} onChange={(e) => setPassword(e.target.value)} />
           </div>
           <div className="text-right">
             <button className="btn btn-primary" type="submit">Create account</button>

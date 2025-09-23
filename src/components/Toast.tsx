@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
+import React, { createContext, useContext, useState, useCallback, useEffect, useMemo } from 'react';
 import { CheckCircle, XCircle, Info } from 'lucide-react';
 
 type Toast = { id: number; type: 'success' | 'error' | 'info'; message: string; action?: { label: string; onClick: () => void } };
@@ -35,13 +35,27 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
     return <Info className="w-5 h-5 text-gray-600" />;
   };
 
+  const toastBg = (type: Toast['type']) => {
+    if (type === 'success') return 'bg-green-100';
+    if (type === 'error') return 'bg-red-100';
+    return 'bg-gray-100';
+  };
+
+  const toastBorder = (type: Toast['type']) => {
+    if (type === 'success') return 'border-green-500';
+    if (type === 'error') return 'border-red-500';
+    return 'border-gray-400';
+  };
+
+  const value = useMemo(() => ({ push }), [push]);
+
   return (
-    <ToastContext.Provider value={{ push }}>
+    <ToastContext.Provider value={value}>
       {children}
       <div className="fixed right-4 bottom-6 flex flex-col gap-2 z-50">
         {toasts.map(t => (
           <div key={t.id} className="relative overflow-hidden flex items-center gap-3 rounded shadow animate-toast-in">
-            <div className={`${t.type === 'success' ? 'bg-green-100' : t.type === 'error' ? 'bg-red-100' : 'bg-gray-100'} flex items-center px-3 py-2 border-l-4 ${t.type === 'success' ? 'border-green-500' : t.type === 'error' ? 'border-red-500' : 'border-gray-400'}`}>
+            <div className={`${toastBg(t.type)} flex items-center px-3 py-2 border-l-4 ${toastBorder(t.type)}`}>
               <div className="mr-3 flex items-center gap-3">
                 <div className="flex items-center justify-center w-6 h-6">{iconFor(t.type)}</div>
                 <div className="text-sm text-gray-800">{t.message}</div>
@@ -49,6 +63,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
               <div className="ml-3">
                 {t.action ? (
                   <button
+                    type="button"
                     className="underline text-sm"
                     onClick={() => {
                       try { t.action!.onClick(); } catch (e) { console.error(e); }
