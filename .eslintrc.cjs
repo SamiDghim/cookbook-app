@@ -29,6 +29,7 @@ module.exports = {
           'vitest.config.*',
           '**/__tests__/**',
           'src/setupTests.ts',
+          'src/mocks/**',
         ],
       },
     ],

@@ -20,6 +20,9 @@ export default function RecipeList({ onSelect }: Props) {
   const toast = useToast();
   const [toDelete, setToDelete] = useState<Recipe | null>(null);
 
+  // hold the last deleted recipe to support undo
+  const lastDeletedRef = useRef<Recipe | null>(null);
+
   const del = useMutation({
     mutationFn: (id: string | number) => deleteRecipe(id as any),
     onSuccess: () => {
@@ -46,15 +49,14 @@ export default function RecipeList({ onSelect }: Props) {
       } } });
       setToDelete(null);
     },
-    onError: (error: any) => {
-      console.error('Failed to delete recipe:', error);
+    onError: (err: any) => {
+      console.error('Failed to delete recipe:', err);
       toast.push({ type: 'error', message: error?.message || 'Failed to delete recipe' });
       setToDelete(null);
     }
   });
 
-  // hold the last deleted recipe to support undo
-  const lastDeletedRef = useRef<Recipe | null>(null);
+  
 
   if (isLoading) return (
     <div className="flex items-center justify-center p-8">
@@ -129,6 +131,7 @@ export default function RecipeList({ onSelect }: Props) {
             
             <div className="flex flex-col gap-2 ml-4">
               <button 
+                type="button"
                 className="btn btn-secondary flex items-center gap-2 text-sm px-3 py-2"
                 onClick={() => onSelect(recipe)}
                 title="Edit recipe"
@@ -137,6 +140,7 @@ export default function RecipeList({ onSelect }: Props) {
                 Edit
               </button>
               <button 
+                type="button"
                 className="btn bg-red-50 text-red-600 hover:bg-red-100 flex items-center gap-2 text-sm px-3 py-2"
                 onClick={() => setToDelete(recipe)}
                 disabled={del.isPending}
