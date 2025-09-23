@@ -1,5 +1,5 @@
 {
-  "name": "reactjs-api",
+  "name": "cookbook-api",
   "version": "0.1.0",
   "description": "Simple Express + SQLite API for recipes",
   "main": "server.js",
