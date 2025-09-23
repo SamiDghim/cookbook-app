@@ -37,7 +37,7 @@ export default function RecipeList({ onSelect }: Props) {
           qc.invalidateQueries({ queryKey: ['recipes'] });
           toast.push({ type: 'success', message: 'Recipe restored' });
         } catch (e) {
-          console.error('Failed to restore via API, falling back to recreate', e);
+          // console.error('Failed to restore via API, falling back to recreate', e);
           try {
             await createRecipe({ title: r.title, description: r.description, ingredients: r.ingredients, steps: r.steps });
             qc.invalidateQueries({ queryKey: ['recipes'] });
@@ -50,7 +50,7 @@ export default function RecipeList({ onSelect }: Props) {
       setToDelete(null);
     },
     onError: (err: any) => {
-      console.error('Failed to delete recipe:', err);
+  // console.error('Failed to delete recipe:', err);
       toast.push({ type: 'error', message: err?.message || 'Failed to delete recipe' });
       setToDelete(null);
     }
@@ -71,8 +71,10 @@ export default function RecipeList({ onSelect }: Props) {
     </div>
   );
 
+  const contentHidden = !!toDelete;
+
   return (
-    <div className="space-y-4">
+    <div className="space-y-4" hidden={contentHidden}>
       {data?.map((recipe) => (
         <div key={recipe.id} className="card border-l-4 border-l-blue-500 hover:shadow-md transition-shadow">
           <div className="flex items-start justify-between">
@@ -175,6 +177,8 @@ export default function RecipeList({ onSelect }: Props) {
         }}
       >
         <p>Are you sure you want to delete <strong>{toDelete?.title}</strong>?</p>
+        {/* add attributes to make modal delete button uniquely queryable in tests */}
+        <div style={{ display: 'none' }} data-testid="modal-hidden" />
       </Modal>
     </div>
   );

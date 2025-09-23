@@ -28,6 +28,8 @@ data/
 logs/
 *.log
 
+
 # Optional
 coverage/
 *.local
+test-results/

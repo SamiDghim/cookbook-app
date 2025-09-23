@@ -1,53 +1,88 @@
-# React Recipes
 
-Local development and tests for the React + Vite recipes app.
 
-## Quick start
+![CI](https://github.com/SamiDghim/cookbook-app/actions/workflows/ci.yml/badge.svg)
 
-1. Install dependencies:
+# Cookbook App
+
+Full-stack recipe manager built with React (Vite), Express, and SQLite. Includes local and Docker-based development, unit and E2E tests, and a simple authentication system.
+
+---
+
+## Features
+
+- Modern React frontend (Vite, TypeScript, Tailwind)
+- Express API with SQLite (file-based, no server needed)
+- Soft-delete for recipes (restore deleted items)
+- Simple authentication (username/password, demo only)
+- Unit tests (Vitest, Testing Library)
+- E2E tests (Playwright)
+
+---
+
+## Getting Started
+
+### 1. Install dependencies
 
 ```bash
 npm install
-# also install api deps
-cd api && npm install
-cd ..
+cd api && npm install && cd ..
 ```
 
-2. Seed the database (creates `data/sqlite.db`):
+### 2. Seed the database
+
+Creates `data/sqlite.db` with sample recipes and a default user (`admin`/`password`).
 
 ```bash
 node api/init-db.js
 ```
 
-3. Run services:
+### 3. Run the app
 
-- To run both frontend and API with Docker Compose (recommended for parity):
+#### Option A: Docker Compose (recommended)
+
+Runs both frontend and API in containers. Hot reload enabled for local code changes.
 
 ```bash
 docker-compose up --build
 ```
 
-- To run locally without Docker:
+#### Option B: Local (no Docker)
+
+Start API:
 
 ```bash
-# start API
 node api/server.js
-# in another terminal
+```
+
+Start frontend (in another terminal):
+
+```bash
 npm run dev
 ```
 
-Frontend will be available at `http://localhost:5173` and API at `http://localhost:4000`.
+Frontend: [http://localhost:5173](http://localhost:5173)
+API: [http://localhost:4000](http://localhost:4000)
 
-## Tests
+---
+
+## Scripts
+
+- `npm run dev` – Start frontend in dev mode
+- `npm run build` – Build frontend for production
+- `npm run lint` – Lint code with ESLint
+- `npm run test` – Run unit tests (Vitest)
+- `npm run e2e` – Run E2E tests (Playwright)
+- `npm run format` – Format code with Prettier
+
+---
+
+## Testing
 
 ### Unit tests (Vitest + Testing Library)
 
 ```bash
-npm install
 npm test
 ```
-
-> If Vitest fails due to Node version compatibility, use Node >= 18.
 
 ### E2E tests (Playwright)
 
@@ -57,14 +92,55 @@ Playwright will start the frontend server automatically (see `playwright.config.
 npx playwright test
 ```
 
-## Notes
+---
 
-- The API implements soft-delete; deleted recipes get a `deletedAt` timestamp and are excluded from normal listing. There's an endpoint `POST /api/recipes/:id/restore` to restore.
- - The API implements soft-delete; deleted recipes get a `deletedAt` timestamp and are excluded from normal listing. There's an endpoint `POST /api/recipes/:id/restore` to restore. You can list deleted items by calling `GET /api/recipes?includeDeleted=true`.
-- The demo auth is simple (plaintext passwords in the DB). Replace with `bcrypt` + JWT for production.
+## API Overview
 
-If you want, I can:
-- Add an admin route to list deleted recipes (`?includeDeleted=true`).
-- Harden authentication (bcrypt + JWT).
-- Run the test suite in a pinned Node Docker container if you can't run tests locally.
+- `GET /api/recipes` – List recipes
+- `GET /api/recipes/:id` – Get recipe by ID
+- `POST /api/recipes` – Create recipe
+- `PUT /api/recipes/:id` – Update recipe
+- `DELETE /api/recipes/:id` – Soft-delete recipe
+- `POST /api/recipes/:id/restore` – Restore soft-deleted recipe
+- `GET /api/recipes?includeDeleted=true` – List all (including deleted)
+- `POST /api/signup` – Create user
+- `POST /api/login` – Login (returns token)
+- `GET /api/profile` – Get user profile (token required)
+
+---
+
+## Authentication
+
+- Demo only: passwords are stored in plaintext. **Do not use in production!**
+- To login: use `admin` / `password` (default user)
+- Auth endpoints: `/api/signup`, `/api/login`, `/api/profile`
+
+---
+
+## Docker
+
+- `docker-compose up --build` – Start both frontend and API
+- `Dockerfile` – Production build (serves static files with Nginx)
+- `Dockerfile.dev` – Dev build (hot reload, Vite dev server)
+- `api/Dockerfile` – API container
+
+---
+
+## Troubleshooting
+
+- If you see database errors, try re-running `node api/init-db.js`.
+- If Playwright E2E tests fail, ensure no other process is using port 5173.
+- For Node version issues, use Node >= 18 (recommended: Node 20).
+
+---
+
+## Contributing
+
+PRs and issues welcome! See TODOs in code and open issues for ideas.
+
+---
+
+## License
+
+MIT
 

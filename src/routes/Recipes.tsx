@@ -20,8 +20,7 @@ export default function Recipes() {
       setShowForm(false);
       toast.push({ type: 'success', message: 'Recipe created' });
     },
-    onError: (error) => {
-      console.error('Failed to create recipe:', error);
+    onError: () => {
       toast.push({ type: 'error', message: 'Failed to create recipe' });
     }
   });
@@ -33,8 +32,7 @@ export default function Recipes() {
       setEditing(null);
       toast.push({ type: 'success', message: 'Recipe updated' });
     },
-    onError: (error) => {
-      console.error('Failed to update recipe:', error);
+    onError: () => {
       toast.push({ type: 'error', message: 'Failed to update recipe' });
     }
   });

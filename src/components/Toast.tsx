@@ -66,7 +66,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
                     type="button"
                     className="underline text-sm"
                     onClick={() => {
-                      try { t.action!.onClick(); } catch (e) { console.error(e); }
+                      try { t.action!.onClick(); } catch (e) { /* console.error(e); */ }
                       remove(t.id);
                     }}
                   >{t.action.label}</button>

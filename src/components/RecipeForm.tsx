@@ -100,7 +100,14 @@ export default function RecipeForm({ initial, onSubmit, onCancel }: Props) {
       ingredients: ingredients.filter(ing => ing.trim() !== ''),
       steps: steps.filter(step => step.trim() !== '')
     };
-    onSubmit(filteredData);
+    // debug: ensure submit is called during tests
+  // eslint-disable-next-line no-console
+  // console.log('RecipeForm: handleFormSubmit called', filteredData);
+  onSubmit(filteredData);
+  // debug: if onSubmit is a Vitest mock, log its mock call count
+  // eslint-disable-next-line no-console
+  // @ts-ignore
+  // console.log('RecipeForm: onSubmit mock calls after invoke =', onSubmit?.mock?.calls?.length ?? 'n/a');
     if (!initial) {
       reset();
       setIngredients(['']);

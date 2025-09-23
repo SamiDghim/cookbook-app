@@ -1,6 +1,9 @@
-import '@testing-library/jest-dom';
-import { beforeAll, afterAll, afterEach } from 'vitest';
-import { server } from './mocks/server';
+import { beforeAll, afterAll, afterEach, expect } from 'vitest';
+import * as matchers from '@testing-library/jest-dom/matchers';
+import server from './mocks/server';
+
+// Register jest-dom matchers with Vitest's expect (do this before importing modules that rely on them)
+expect.extend(matchers as any);
 
 // Establish API mocking before all tests.
 beforeAll(() => server.listen({ onUnhandledRequest: 'warn' }));
