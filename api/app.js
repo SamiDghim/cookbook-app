@@ -9,7 +9,10 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-const dbPath = path.resolve(__dirname, '../data/sqlite.db');
+// Allow overriding the SQLite DB path with an environment variable so hosted
+// environments (like Render) can mount a persistent disk in a custom location.
+const dbPath = process.env.SQLITE_DB_PATH || path.resolve(__dirname, '../data/sqlite.db');
+console.log(`Using SQLite DB at ${dbPath}`);
 const db = new Database(dbPath, { verbose: console.log });
 
 function parseRow(row) {

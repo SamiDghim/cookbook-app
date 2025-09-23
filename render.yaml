@@ -1,13 +1,5 @@
-# Render service definitions for cookbook-app
-# Assumptions:
-# - Region: oregon
-# - API will use a 5 GB persistent disk mounted at /opt/render/project/src/data
-# - Branch: main
-# Update values below (region, disk size, names) if you prefer different settings.
-
 static_sites:
   - name: cookbook-frontend
-    # repo can be omitted when connected in the Render UI; Render will infer the repo when you import
     branch: main
     buildCommand: npm ci && npm run build
     publishPath: dist
@@ -19,16 +11,13 @@ services:
     branch: main
     plan: free
     region: oregon
-    # Build the API, and initialize the SQLite DB at build time so the DB file exists on disk
     buildCommand: cd api && npm ci && npm run init-db
     startCommand: cd api && npm start
     envVars:
       - key: NODE_ENV
         value: production
-      # If you prefer to explicitly set the sqlite path, uncomment and set SQLITE_DB_PATH
-      # - key: SQLITE_DB_PATH
-      #   value: /opt/render/project/src/data/sqlite.db
-    # Attach a persistent disk so the SQLite DB in `data/` persists across deploys
+      - key: SQLITE_DB_PATH
+        value: /opt/render/project/src/data/sqlite.db
     disk:
       size_gb: 5
       mount_path: /opt/render/project/src/data
