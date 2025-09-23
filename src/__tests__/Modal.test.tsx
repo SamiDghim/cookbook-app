@@ -8,7 +8,7 @@ test('Modal renders and calls confirm/cancel', async () => {
   const onConfirm = vi.fn();
   const onCancel = vi.fn();
   renderWithProviders(
-    <Modal open={true} title="Confirm" confirmText="Yes" cancelText="No" onConfirm={onConfirm} onCancel={onCancel}>
+    <Modal open title="Confirm" confirmText="Yes" cancelText="No" onConfirm={onConfirm} onCancel={onCancel}>
       <p>Are you sure?</p>
     </Modal>
   );

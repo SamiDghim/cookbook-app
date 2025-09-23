@@ -22,7 +22,15 @@ module.exports = {
   rules: {
     'import/no-extraneous-dependencies': [
       'error',
-      { devDependencies: ['**/*.test.*', 'e2e/**', 'vitest.config.*', '**/__tests__/**'] },
+      {
+        devDependencies: [
+          '**/*.test.*',
+          'e2e/**',
+          'vitest.config.*',
+          '**/__tests__/**',
+          'src/setupTests.ts',
+        ],
+      },
     ],
     'react/jsx-filename-extension': [1, { extensions: ['.tsx', '.jsx'] }],
     'react/react-in-jsx-scope': 'off',

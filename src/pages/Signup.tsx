@@ -1,7 +1,7 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { signup } from '../api/auth';
 import { useAuth } from '../components/Auth';
-import { useNavigate } from 'react-router-dom';
 
 export default function Signup() {
   const [username, setUsername] = useState('');

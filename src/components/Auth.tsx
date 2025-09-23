@@ -16,12 +16,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (token) {
-      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      api.defaults.headers.common.Authorization = `Bearer ${token}`;
       localStorage.setItem('token', token);
       // optionally fetch profile
       api.get('/api/profile').then(r => setUser(r.data.user)).catch(() => setUser(null));
     } else {
-      delete api.defaults.headers.common['Authorization'];
+      delete api.defaults.headers.common.Authorization;
       localStorage.removeItem('token');
       setUser(null);
     }

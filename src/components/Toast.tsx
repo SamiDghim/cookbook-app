@@ -40,7 +40,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
       {children}
       <div className="fixed right-4 bottom-6 flex flex-col gap-2 z-50">
         {toasts.map(t => (
-          <div key={t.id} className={`relative overflow-hidden flex items-center gap-3 rounded shadow animate-toast-in`}>
+          <div key={t.id} className="relative overflow-hidden flex items-center gap-3 rounded shadow animate-toast-in">
             <div className={`${t.type === 'success' ? 'bg-green-100' : t.type === 'error' ? 'bg-red-100' : 'bg-gray-100'} flex items-center px-3 py-2 border-l-4 ${t.type === 'success' ? 'border-green-500' : t.type === 'error' ? 'border-red-500' : 'border-gray-400'}`}>
               <div className="mr-3 flex items-center gap-3">
                 <div className="flex items-center justify-center w-6 h-6">{iconFor(t.type)}</div>

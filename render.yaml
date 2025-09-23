@@ -7,7 +7,6 @@ static_sites:
 services:
   - type: web
     name: cookbook-api
-    env: node
     branch: main
     plan: free
     region: oregon
@@ -20,5 +19,5 @@ services:
         value: /opt/render/project/src/data/sqlite.db
     disk:
       name: cookbook-data-disk
-      size_gb: 5
+      sizeGB: 5
       mountPath: /opt/render/project/src/data

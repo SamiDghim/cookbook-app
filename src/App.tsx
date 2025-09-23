@@ -1,13 +1,12 @@
 import { QueryClientProvider } from '@tanstack/react-query';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider , Outlet } from 'react-router-dom';
 import Recipes from './routes/Recipes';
 import NavBar from './components/NavBar';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Profile from './pages/Profile';
 import PublicSearch from './pages/PublicSearch';
-import { Outlet } from 'react-router-dom';
-import { queryClient } from './store/queryClient';
+import queryClient from './store/queryClient';
 import './index.css';
 
 function RootLayout() {

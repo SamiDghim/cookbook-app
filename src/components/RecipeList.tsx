@@ -1,9 +1,9 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { Trash2, Edit, Clock, ChefHat } from 'lucide-react';
+import { useState, useRef } from 'react';
 import { fetchRecipes, deleteRecipe, createRecipe, restoreRecipe } from '../api/recipes';
 import type { Recipe } from '../types';
-import { Trash2, Edit, Clock, ChefHat } from 'lucide-react';
 import Modal from './Modal';
-import { useState, useRef } from 'react';
 import { useToast } from './Toast';
 
 interface Props {
@@ -58,7 +58,7 @@ export default function RecipeList({ onSelect }: Props) {
 
   if (isLoading) return (
     <div className="flex items-center justify-center p-8">
-      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600" />
       <span className="ml-2">Loading recipes...</span>
     </div>
   );
@@ -87,7 +87,7 @@ export default function RecipeList({ onSelect }: Props) {
                   <ul className="text-gray-600 space-y-1">
                     {recipe.ingredients.slice(0, 3).map((ingredient, idx) => (
                       <li key={idx} className="flex items-center">
-                        <span className="w-1.5 h-1.5 bg-blue-500 rounded-full mr-2"></span>
+                        <span className="w-1.5 h-1.5 bg-blue-500 rounded-full mr-2" />
                         {ingredient}
                       </li>
                     ))}
@@ -159,7 +159,7 @@ export default function RecipeList({ onSelect }: Props) {
       )}
       <Modal
         open={!!toDelete}
-        title={`Delete recipe`}
+        title="Delete recipe"
         confirmText="Delete"
         cancelText="Cancel"
         onCancel={() => setToDelete(null)}
