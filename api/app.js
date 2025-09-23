@@ -9,8 +9,6 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-// Allow overriding the SQLite DB path with an environment variable so hosted
-// environments (like Render) can mount a persistent disk in a custom location.
 const dbPath = process.env.SQLITE_DB_PATH || path.resolve(__dirname, '../data/sqlite.db');
 console.log(`Using SQLite DB at ${dbPath}`);
 const db = new Database(dbPath, { verbose: console.log });
@@ -99,7 +97,6 @@ app.post('/api/recipes/:id/restore', (req, res) => {
   res.json(parseRow(updated));
 });
 
-// Simple auth routes (no real hashing for demo — easy to replace with bcrypt/jwt)
 app.post('/api/signup', (req, res) => {
   const { username, password } = req.body;
   if (!username || !password) return res.status(400).json({ message: 'username and password required' });

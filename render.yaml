@@ -19,5 +19,6 @@ services:
       - key: SQLITE_DB_PATH
         value: /opt/render/project/src/data/sqlite.db
     disk:
+      name: cookbook-data-disk
       size_gb: 5
-      mount_path: /opt/render/project/src/data
+      mountPath: /opt/render/project/src/data
